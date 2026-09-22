@@ -1,0 +1,296 @@
+:root {
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --border: #d7dee3;
+  --text: #1c2733;
+  --muted: #6b7a86;
+  --primary: #1d4e89;
+  --primary-dark: #143a66;
+  --danger: #b3261e;
+  --today-bg: #fff6d6;
+  --radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+h1, h2, h3 { margin: 0 0 0.5em; font-weight: 600; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--primary);
+  color: #fff;
+}
+.topbar h1 { font-size: 1.15rem; margin: 0; }
+
+.tabs { display: flex; gap: 4px; }
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #dce7f2;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.12); }
+.tab-btn.active { background: #fff; color: var(--primary-dark); font-weight: 600; }
+
+main { max-width: 1500px; margin: 0 auto; padding: 20px 24px 60px; }
+#view-batches, #view-clinics, #view-data { max-width: 1100px; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.hint { color: var(--muted); font-size: 0.85rem; }
+
+/* ---- Buttons ---- */
+button { font: inherit; }
+.btn-primary, .btn-secondary, .btn-danger, .btn-link {
+  cursor: pointer;
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: #fff; border-color: var(--border); color: var(--text); }
+.btn-secondary:hover { background: #eef1f4; }
+.btn-danger { background: #fff; border-color: var(--danger); color: var(--danger); }
+.btn-danger:hover { background: #fbeceb; }
+.btn-link { background: none; border: none; color: var(--primary); cursor: pointer; padding: 4px 6px; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+thead { background: #eef2f5; }
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+th.num, td.num { text-align: right; }
+tbody tr:last-child td { border-bottom: none; }
+tr.row-clickable:hover { background: #f5f9fc; cursor: pointer; }
+td.empty { text-align: center; color: var(--muted); padding: 24px; }
+.muted { color: var(--muted); font-size: 0.85em; }
+.over { color: var(--danger); font-weight: 600; }
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ---- Data tab ---- */
+.data-actions { display: flex; gap: 10px; margin: 10px 0 24px; flex-wrap: wrap; }
+
+/* ---- Calendar ---- */
+.cal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.cal-toolbar label { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; }
+select, input[type="text"], input[type="date"], input[type="number"] {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+.legend-item { display: flex; align-items: center; }
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.cal-header h2 { flex: 1; text-align: center; font-size: 1.05rem; }
+.cal-nav, .cal-today {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.cal-today { font-size: 0.85rem; }
+
+/* Page of MONTHS_PER_PAGE (4) months: 2x2 by default, all 4 in a row on
+   wide screens, stacked on narrow ones. */
+.cal-page {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 20px;
+}
+@media (min-width: 1300px) {
+  .cal-page { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .cal-page { grid-template-columns: 1fr; }
+}
+
+.cal-month { min-width: 0; }
+.cal-month-title {
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.cal-month .cal-cell { min-height: 58px; padding: 4px; gap: 2px; }
+.cal-month .cal-date { font-size: 0.7rem; }
+.cal-month .cal-dow-cell { font-size: 0.68rem; }
+.cal-month .cal-chip { font-size: 0.63rem; padding: 1px 4px; }
+.cal-month .cal-grid { gap: 3px; }
+
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { margin-bottom: 4px; }
+.cal-dow-cell { text-align: center; font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+.cal-cell {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  min-height: 92px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cal-cell--muted { opacity: 0.45; }
+.cal-cell--today { border-color: var(--primary); background: var(--today-bg); }
+.cal-date { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+.cal-chips { display: flex; flex-direction: column; gap: 3px; }
+.cal-chip {
+  border: none;
+  border-left: 4px solid var(--org-color, #888);
+  background: #eef2f5;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cal-chip--batch { background: #eef2f5; }
+.cal-chip--clinic { background: #e7f0e9; }
+.cal-chip:hover { filter: brightness(0.95); }
+.cal-chip--focused { outline: 2px solid var(--text); outline-offset: 1px; font-weight: 700; }
+.cal-chip--dimmed { opacity: 0.35; }
+
+.cal-cell--runway { border-width: 1.5px; }
+
+/* ---- Batch focus panel ---- */
+.focus-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--org-color, #888);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.focus-panel.hidden { display: none; }
+.focus-panel h3 { margin: 0 0 4px; font-size: 1rem; }
+.focus-panel .fp-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; }
+.focus-panel ul { margin: 8px 0; padding-left: 18px; }
+.focus-panel li { font-size: 0.85rem; margin-bottom: 3px; cursor: pointer; color: var(--primary); }
+.focus-panel li:hover { text-decoration: underline; }
+.focus-panel li.muted { cursor: default; color: var(--muted); text-decoration: none; }
+.focus-panel-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+
+/* ---- Modal / forms ---- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 30, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6vh 16px;
+  overflow-y: auto;
+}
+.modal-backdrop.hidden { display: none; }
+.modal {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 22px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.form input, .form select { font-weight: 400; }
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.form-actions > div { display: flex; gap: 8px; }
+
+/* ---- Toast ---- */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1c2733;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 50;
+}
+.toast.hidden { display: none; }
+
+@media (max-width: 640px) {
+  main { padding: 14px; }
+  .cal-cell { min-height: 70px; }
+  table, thead, tbody, th, td, tr { font-size: 0.82rem; }
+}
