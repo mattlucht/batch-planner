@@ -1,0 +1,177 @@
+{
+  "orgs": [
+    {
+      "id": "org-humberside",
+      "name": "Humberside",
+      "color": "#2a6f97"
+    },
+    {
+      "id": "org-somerset",
+      "name": "Somerset",
+      "color": "#b5541b"
+    },
+    {
+      "id": "org-manchester",
+      "name": "Manchester",
+      "color": "#5b7f3e"
+    }
+  ],
+  "batches": [
+    {
+      "id": "batch-mucnq6s86j0jet",
+      "orgId": "org-humberside",
+      "name": "RUBIE-TEST-1",
+      "specDate": "2026-09-15",
+      "peopleCount": 2100
+    },
+    {
+      "id": "batch-muco1qmgpg3noh",
+      "orgId": "org-humberside",
+      "name": "RUBIE-TEST-2",
+      "specDate": "2026-11-10",
+      "peopleCount": 6000
+    }
+  ],
+  "clinics": [
+    {
+      "id": "clinic-mucnm9fypxe12l",
+      "orgId": "org-humberside",
+      "date": "2026-10-06",
+      "slots": 10,
+      "batchId": "batch-mucnq6s86j0jet"
+    },
+    {
+      "id": "clinic-mucnmjnpcgxlo4",
+      "orgId": "org-humberside",
+      "date": "2026-11-03",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucnmz0g52n1e2",
+      "orgId": "org-humberside",
+      "date": "2026-12-01",
+      "slots": 20,
+      "batchId": "batch-muco1qmgpg3noh"
+    },
+    {
+      "id": "clinic-mucnnd1cja2mfj",
+      "orgId": "org-humberside",
+      "date": "2027-01-05",
+      "slots": 20,
+      "batchId": "batch-muco1qmgpg3noh"
+    },
+    {
+      "id": "clinic-mucnnkjgb2ivbt",
+      "orgId": "org-humberside",
+      "date": "2027-02-02",
+      "slots": 20,
+      "batchId": "batch-muco1qmgpg3noh"
+    },
+    {
+      "id": "clinic-mucno43qgt5jlm",
+      "orgId": "org-somerset",
+      "date": "2026-10-14",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucnocub4gjsml",
+      "orgId": "org-somerset",
+      "date": "2026-11-11",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucnotiji6fq8p",
+      "orgId": "org-somerset",
+      "date": "2026-12-09",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucnp1l1nbre6o",
+      "orgId": "org-manchester",
+      "date": "2026-11-18",
+      "slots": 10,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp23cmkqhcc6",
+      "orgId": "org-humberside",
+      "date": "2027-03-02",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp2cwl0bhl5h",
+      "orgId": "org-humberside",
+      "date": "2027-04-06",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp364wifzh4j",
+      "orgId": "org-somerset",
+      "date": "2027-01-13",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp3frfpff0nc",
+      "orgId": "org-somerset",
+      "date": "2027-02-10",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp3syw0lxxkl",
+      "orgId": "org-somerset",
+      "date": "2027-03-10",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp43rshu2g30",
+      "orgId": "org-somerset",
+      "date": "2027-04-14",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp4jj5yu05d2",
+      "orgId": "org-manchester",
+      "date": "2026-12-16",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp4rx0rgufuy",
+      "orgId": "org-manchester",
+      "date": "2027-01-20",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp55opk1c1lq",
+      "orgId": "org-manchester",
+      "date": "2027-02-17",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp5ia6le16ps",
+      "orgId": "org-manchester",
+      "date": "2027-03-17",
+      "slots": 20,
+      "batchId": null
+    },
+    {
+      "id": "clinic-mucp5sx2ve4k4y",
+      "orgId": "org-manchester",
+      "date": "2027-04-21",
+      "slots": 20,
+      "batchId": null
+    }
+  ]
+}
