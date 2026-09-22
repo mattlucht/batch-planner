@@ -74,7 +74,9 @@ function saveRaw(data) {
 }
 
 const Store = (function () {
-  let data = loadRaw() || defaultData();
+  const existingRaw = loadRaw();
+  let data = existingRaw || defaultData();
+  const hadStoredDataOnLoad = Boolean(existingRaw);
   const listeners = [];
 
   function persist() {
@@ -89,6 +91,12 @@ const Store = (function () {
 
     getData() {
       return data;
+    },
+
+    // True if this browser already had data saved before this page load
+    // (i.e. this isn't a brand-new visitor with an empty localStorage).
+    hadStoredData() {
+      return hadStoredDataOnLoad;
     },
 
     // ---- Organisations ----

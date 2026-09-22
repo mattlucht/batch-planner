@@ -81,6 +81,14 @@
       <button type="button" id="btn-import" class="btn-secondary">Import JSON&hellip;</button>
       <input type="file" id="file-import" accept="application/json" hidden>
     </div>
+
+    <h3>Publish for others to see</h3>
+    <p>To let others viewing this site see your data: click <strong>Export JSON</strong> above, rename the downloaded file to <code>data.json</code>, and add/replace it in the repo next to <code>index.html</code> (commit &amp; push, or use GitHub's "Upload files"). A visitor opening the site for the <em>first time</em> in their browser will load it automatically; anyone can also pull a fresh copy at any time with the button below.</p>
+    <div class="data-actions">
+      <button type="button" id="btn-reload-published" class="btn-secondary">Reload published data</button>
+    </div>
+    <p class="hint">This isn't live &mdash; it's a manual snapshot. Once a browser has its own data (from editing, importing, or loading the published copy once), it keeps using that until "Reload published data" is clicked again.</p>
+
     <h3>Sample / reset</h3>
     <div class="data-actions">
       <button type="button" id="btn-load-sample" class="btn-secondary">Load sample data</button>

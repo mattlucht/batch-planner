@@ -9,7 +9,9 @@ server-side code. All data is stored in your browser's `localStorage`, so it
 persists between visits on the same browser/computer, but isn't shared
 automatically between people or devices. Use **Data &rarr; Export JSON** to
 back up or move your data (e.g. to another computer, or to hand a snapshot to
-a colleague, who can import it into their own browser).
+a colleague, who can import it into their own browser) &mdash; or, if you're
+hosting on GitHub Pages, see **Sharing data with others on GitHub Pages**
+below for a way to publish a read-only snapshot everyone can see.
 
 ## Running it locally
 
@@ -77,6 +79,48 @@ The Batches table has a matching **Runway** column and an **On calendar**
 link per row that jumps to the calendar with that batch already focused,
 its first visible month, so the following 3 months give you the forward
 look.
+
+## Sharing data with others on GitHub Pages
+
+Because data lives in each visitor's own browser `localStorage`, hosting on
+GitHub Pages doesn't automatically share it &mdash; everyone who opens the
+page starts from their own empty (or sample) data. There's a lightweight
+way to publish a read-only snapshot for others, built on the existing
+Export/Import feature:
+
+1. In the app, go to **Data &rarr; Export JSON**.
+2. Rename the downloaded file to `data.json`.
+3. Add or replace it in the repo, in the same folder as `index.html` (commit
+   &amp; push, or use GitHub's web "Upload files"/"Add file" &rarr; "Replace
+   file").
+4. Within a minute or so it's live on Pages. Anyone opening the site for the
+   **first time** in a given browser will load it automatically; anyone can
+   also pull a fresh copy at any time with **Data &rarr; Reload published
+   data**.
+
+This is intentionally simple and free &mdash; no new accounts, no tokens, no
+database &mdash; and fits a single-editor setup well. Worth knowing before
+you rely on it:
+
+- **It's a snapshot, not live.** A browser that already has its own data
+  (from editing, importing, or loading the published copy once) won't
+  auto-refresh; whoever's looking needs to click "Reload published data" to
+  pick up a newer publish. There's no warning if what they're looking at has
+  gone stale.
+- **If the repo is public, `data.json` is public too** &mdash; visible to
+  anyone with the URL, same as the rest of the site's code. Fine for
+  planning metadata like this (batch sizes/dates, clinic dates/slot counts),
+  but don't let this evolve into somewhere real patient-identifiable data
+  ends up without checking with your info governance team first.
+- **It only really works with one editor.** If several people start editing
+  independently in their own browsers, there's no merging &mdash; the last
+  person to publish `data.json` wins, silently overwriting whatever anyone
+  else published before them.
+
+If you outgrow this (multiple editors, real-time updates), the next step up
+would be a small hosted database (e.g. Firebase or Supabase) or writing to
+the repo directly via the GitHub API, both of which need more setup than
+this version.
 
 ## Sample data
 

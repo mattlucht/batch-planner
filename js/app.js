@@ -405,6 +405,18 @@
       }
     });
 
+    $('#btn-reload-published').addEventListener('click', async () => {
+      if (!window.confirm('This replaces all current data in this browser with the latest published data.json. Continue?')) return;
+      try {
+        const json = await fetchPublishedData();
+        Store.importJSON(json);
+        toast('Reloaded published data');
+        refreshAll();
+      } catch (err) {
+        alert('Could not reload published data: ' + err.message);
+      }
+    });
+
     $('#btn-clear-all').addEventListener('click', () => {
       if (window.confirm('This permanently deletes all batches and clinics. Continue?')) {
         Store.clearAll();
@@ -496,9 +508,19 @@
   }
 
   // ---------------------------------------------------------------
+  // Published data.json (see initDataTab's "Reload published data" for
+  // the manual version of this same fetch)
+  // ---------------------------------------------------------------
+  async function fetchPublishedData() {
+    const res = await fetch('data.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`No published data.json found (HTTP ${res.status}).`);
+    return res.text();
+  }
+
+  // ---------------------------------------------------------------
   // Init
   // ---------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     initTabs();
     initTableClicks();
     initDataTab();
@@ -507,13 +529,31 @@
     $('#btn-add-batch').addEventListener('click', () => openModal(batchFormNode(null)));
     $('#btn-add-clinic').addEventListener('click', () => openModal(clinicFormNode(null)));
 
+    // First-ever visit in this browser (nothing in localStorage yet): try
+    // loading whatever's been published to data.json, so a new visitor
+    // sees the latest shared snapshot instead of a blank slate. Once this
+    // browser has its own data, later visits leave it alone — use
+    // "Reload published data" on the Data tab to pull a fresh copy.
+    let loadedPublished = false;
+    if (!Store.hadStoredData()) {
+      try {
+        const json = await fetchPublishedData();
+        Store.importJSON(json);
+        loadedPublished = true;
+      } catch (e) {
+        // No published snapshot yet (or it couldn't be reached) — that's fine,
+        // just start from the empty default.
+      }
+    }
+
     renderOrgFilterAndLegend();
     renderBatchesTable();
     renderClinicsTable();
     Calendar.refresh(null);
 
-    // Friendly first-run nudge if there's no data at all yet.
-    if (!Store.getBatches().length && !Store.getClinics().length) {
+    if (loadedPublished) {
+      toast('Loaded the latest published data');
+    } else if (!Store.getBatches().length && !Store.getClinics().length) {
       toast('No data yet — add a batch/clinic, or load sample data from the Data tab.');
     }
   });
