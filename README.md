@@ -78,25 +78,6 @@ link per row that jumps to the calendar with that batch already focused,
 its first visible month, so the following 3 months give you the forward
 look.
 
-## Hosting on GitHub Pages later
-
-Since this is a plain static site, moving it to GitHub Pages is
-straightforward:
-
-1. Push this folder to a GitHub repo.
-2. In the repo's Settings &rarr; Pages, set the source to the branch/folder
-   containing `index.html` (e.g. `main` / `/root`, or a `docs/` folder if
-   you move things there).
-3. GitHub will publish it at `https://<your-username>.github.io/<repo>/`.
-
-One thing to know: because data lives in each visitor's own browser
-`localStorage`, a GitHub Pages deployment won't automatically share data
-between you and your team &mdash; each person who opens the page starts with
-their own empty (or sample) data, and you'd pass data around via the
-Export/Import JSON feature. If you later want everyone to see the same
-live data, that needs a small backend and a real database behind it, which
-would be a bigger step up from this version.
-
 ## Sample data
 
 The Data tab has a **Load sample data** button that fills in a handful of
